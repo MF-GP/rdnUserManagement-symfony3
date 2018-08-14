@@ -1,0 +1,50 @@
+# Acme/DemoBundle/Resources/config/admin.yml
+services:
+    sonata.block.service.server_run_status:
+        class: AppBundle\Admin\Blocks\ServerRunStatusLogBlockService
+        arguments: [ "sonata.block.service.server_run_status", "@templating", "@doctrine.orm.entity_manager", "@security.authorization_checker"]
+        tags:
+        - { name: sonata.block }
+
+    sonata.admin.transaction:
+        class: AppBundle\Admin\TransactionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Transaction" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Transaction
+            - AppBundle:Admin\Admin
+
+    sonata.admin.transaction_log:
+            class: AppBundle\Admin\TransactionLogAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: "Content", label: "Transaction Logs", pager_type: "simple" }
+            arguments:
+                - ~
+                - AppBundle\Entity\TransactionLog
+                - ~
+
+    sonata.admin.audit:
+        class: AppBundle\Admin\AuditAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Audit" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Audit
+            - ~
+
+
+    sonata.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "User Management" }
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - ~
+
+    sonata.block.service.balance_check:
+        class: AppBundle\Admin\Blocks\CurrentBalanceBlockService
+        arguments: [ "sonata.block.service.balance_check", "@templating", "@doctrine.orm.entity_manager", "@security.authorization_checker"]
+        tags:
+        - { name: sonata.block }

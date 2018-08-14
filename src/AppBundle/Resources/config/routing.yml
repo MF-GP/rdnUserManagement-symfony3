@@ -1,0 +1,15 @@
+admin_update_server_run_status:
+    path:  /admin/updateServerRunStatus/{status}
+    defaults: { _controller: AppBundle:Admin\ServerRunStatus:update }
+    options:
+        expose: true
+
+admin_balance_check:
+    path:  /admin/balanceCheck/
+    defaults: { _controller: AppBundle:Admin\BalanceCheck:update }
+    options:
+        expose: true
+
+mytel_api_soap_server:
+    path: /ws/mytel
+    defaults: { _controller: AppBundle:Soap:mytel }

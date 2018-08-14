@@ -76,18 +76,18 @@ fos_user:
         address: "%mailer_user%"
         sender_name: "RDN User Management"
 
-# lexik_maintenance:
-#     authorized:
-#         ips: '%allowed_ips_during_maintenance%'
-#     driver:
-#         ttl: 3600
-#         class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
-#         options: {file_path: "%kernel.root_dir%/cache/lock"}
+lexik_maintenance:
+    authorized:
+        ips: '%allowed_ips_during_maintenance%'
+    driver:
+        ttl: 3600
+        class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
+        options: {file_path: "%kernel.root_dir%/cache/lock"}
 
-#     #Optional. response code and status of the maintenance page
-#     response:
-#         code: 503
-#         status: "Service Temporarily Unavailable"
+    #Optional. response code and status of the maintenance page
+    response:
+        code: 503
+        status: "Service Temporarily Unavailable"
 
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
@@ -102,8 +102,8 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 
-        sonata.block.service.server_run_status:
-        sonata.block.service.balance_check:
+        # sonata.block.service.server_run_status:
+        # sonata.block.service.balance_check:
 
 sonata_admin:
     security:
@@ -130,7 +130,7 @@ sonata_admin:
         blocks:
             # display a dashboard block
             - { position: left, type: sonata.admin.block.admin_list }
-            - { position: right, type: sonata.block.service.server_run_status}
+            # - { position: right, type: sonata.block.service.server_run_status}
             - { position: right, type: sonata.block.service.balance_check, roles:[ROLE_VIEW_BALANCE,ROLE_ADMIN]}
 
 sonata_core:
