@@ -74,69 +74,20 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: "%mailer_user%"
-        sender_name: "RDN MyTel ELoad"
+        sender_name: "RDN User Management"
 
-services:
-    api_formatter:
-        class: Monolog\Formatter\JsonFormatter
+# lexik_maintenance:
+#     authorized:
+#         ips: '%allowed_ips_during_maintenance%'
+#     driver:
+#         ttl: 3600
+#         class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
+#         options: {file_path: "%kernel.root_dir%/cache/lock"}
 
-monolog:
-    handlers:
-        main:
-            type: fingers_crossed
-            action_level: error
-            handler: nested
-        nested:
-            type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
-        api:
-            type: stream
-            path: "%kernel.logs_dir%/apiRequest.log"
-            level: debug
-            channels: [api]
-            formatter: api_formatter
-        mytel:
-            type: stream
-            path: "%kernel.logs_dir%/myTel.log"
-            level: debug
-            channels: [mytel]
-            formatter: api_formatter
-        exception:
-            type: stream
-            path: "%kernel.logs_dir%/exception.log"
-            level: error
-            channels: ['exception']
-            formatter: api_formatter
-        console:
-            type:   console
-            bubble: false
-            verbosity_levels:
-                VERBOSITY_VERBOSE: INFO
-                VERBOSITY_VERY_VERBOSE: DEBUG
-            channels: ["!doctrine"]
-        console_very_verbose:
-            type:   console
-            bubble: false
-            verbosity_levels:
-                VERBOSITY_VERBOSE: NOTICE
-                VERBOSITY_VERY_VERBOSE: NOTICE
-                VERBOSITY_DEBUG: DEBUG
-            channels: ["doctrine"]
-    channels: [api, mytel, exception]
-
-lexik_maintenance:
-    authorized:
-        ips: '%allowed_ips_during_maintenance%'
-    driver:
-        ttl: 3600
-        class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
-        options: {file_path: "%kernel.root_dir%/cache/lock"}
-
-    #Optional. response code and status of the maintenance page
-    response:
-        code: 503
-        status: "Service Temporarily Unavailable"
+#     #Optional. response code and status of the maintenance page
+#     response:
+#         code: 503
+#         status: "Service Temporarily Unavailable"
 
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
@@ -168,7 +119,7 @@ sonata_admin:
         # permission related to the objects
         object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
 
-    title: MyTel Eload Admin
+    title: UserManagement Admin
     title_logo: bundles/app/images/logo.png
     options:
         use_icheck: false
@@ -185,11 +136,11 @@ sonata_admin:
 sonata_core:
     flashmessage:
         success:
-            types:
-                - { type: server_run_status_change_success, domain: AppBundle }
-                - { type: transaction_status_check_success, domain: AppBundle }
+            # types:
+            #     - { type: server_run_status_change_success, domain: AppBundle }
+            #     - { type: transaction_status_check_success, domain: AppBundle }
         error:
             css_class: danger # optionally, a CSS class can be defined
-            types:
-                - { type: server_run_status_change_error, domain: AppBundle }
-                - { type: transaction_status_check_error, domain: AppBundle }
+            # types:
+            #     - { type: server_run_status_change_error, domain: AppBundle }
+            #     - { type: transaction_status_check_error, domain: AppBundle }
